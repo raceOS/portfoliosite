@@ -331,12 +331,6 @@
       }
 
       /* Glitch colors */
-      html.light .h1-wrap::before {
-        color: #ff4466;
-      }
-      html.light .h1-wrap::after {
-        color: #0066ff;
-      }
 
       /* Smooth theme transitions - scoped to key properties only */
       body,
@@ -1827,82 +1821,6 @@
       }
 
       /* ── GLITCH on h1 ── */
-      @keyframes glitch1 {
-        0%,
-        100% {
-          clip-path: inset(0 0 96% 0);
-          transform: translate(-3px, 0);
-        }
-        20% {
-          clip-path: inset(30% 0 50% 0);
-          transform: translate(3px, 0);
-        }
-        40% {
-          clip-path: inset(60% 0 20% 0);
-          transform: translate(-2px, 0);
-        }
-        60% {
-          clip-path: inset(80% 0 5% 0);
-          transform: translate(2px, 0);
-        }
-        80% {
-          clip-path: inset(10% 0 80% 0);
-          transform: translate(-1px, 0);
-        }
-      }
-      @keyframes glitch2 {
-        0%,
-        100% {
-          clip-path: inset(50% 0 30% 0);
-          transform: translate(3px, 0);
-        }
-        25% {
-          clip-path: inset(10% 0 70% 0);
-          transform: translate(-3px, 0);
-        }
-        50% {
-          clip-path: inset(70% 0 10% 0);
-          transform: translate(2px, 0);
-        }
-        75% {
-          clip-path: inset(20% 0 60% 0);
-          transform: translate(-2px, 0);
-        }
-      }
-      .h1-wrap {
-        position: relative;
-        display: inline-block;
-        width: 100%;
-        max-width: 900px;
-      }
-      .h1-wrap::before,
-      .h1-wrap::after {
-        content: attr(data-text);
-        position: absolute;
-        inset: 0;
-        font-family: inherit;
-        font-size: inherit;
-        font-weight: inherit;
-        letter-spacing: inherit;
-        line-height: inherit;
-        text-align: center;
-        pointer-events: none;
-        opacity: 0;
-      }
-      .h1-wrap::before {
-        color: #ff003c;
-        animation: glitch1 6s infinite;
-        animation-delay: 3s;
-      }
-      .h1-wrap::after {
-        color: #00d4ff;
-        animation: glitch2 6s infinite;
-        animation-delay: 3.1s;
-      }
-      .h1-wrap:hover::before,
-      .h1-wrap:hover::after {
-        opacity: 1;
-      }
 
       /* ── SCANLINE overlay ── */
       body::after {
@@ -2478,12 +2396,10 @@
     <!-- HERO -->
     <section id="hero">
       <div class="hero-tag">Now in Beta — Join 4,200+ Riders</div>
-      <div class="h1-wrap" data-text="YOUR BIKE. SMARTER.">
-        <h1>
-          YOUR BIKE.<br />
-          <span class="line2">SMARTER.</span>
-        </h1>
-      </div>
+      <h1>
+        YOUR BIKE.<br />
+        <span class="line2">SMARTER.</span>
+      </h1>
       <p class="hero-sub">
         RaceOS transforms your motorcycle into an intelligent machine. Real-time
         telemetry, ride analytics, and a dashboard built for riders who demand
@@ -3401,6 +3317,29 @@
           return p;
         });
 
+        // ── Floating RACEOS text words ──
+        const WORDS = ["RACEOS", "RACE", "OS", "RACEOS", "RIDE", "RACEOS"];
+
+        function makeText() {
+          return {
+            word: WORDS[Math.floor(Math.random() * WORDS.length)],
+            x: rand(0, W),
+            y: rand(H + 20, H + 300),
+            vx: rand(-0.12, 0.12),
+            vy: rand(-0.25, -0.55),
+            rot: rand(-0.3, 0.3),
+            vrot: rand(-0.002, 0.002),
+            size: rand(11, 28),
+            alpha: rand(0.06, 0.14),
+          };
+        }
+
+        const TEXTS = Array.from({ length: 10 }, () => {
+          const t = makeText();
+          t.y = rand(-H, H);
+          return t;
+        });
+
         // ── Renderers ──
         function gear(x, y, r, teeth, rot, col, a) {
           const ir = r * 0.55,
@@ -3646,6 +3585,37 @@
             if (p.x < -p.size * 2) p.x = W + p.size;
             if (p.x > W + p.size * 2) p.x = -p.size;
             drawPart(p);
+          });
+
+          // ── Floating RACEOS text pieces ──
+          TEXTS.forEach((t) => {
+            t.x += t.vx;
+            t.y += t.vy;
+            t.rot += t.vrot;
+            t.x += Math.sin(t.y * 0.006 + t.rot) * 0.08;
+            if (t.y < -80) {
+              Object.assign(t, makeText());
+            }
+            if (t.x < -120) t.x = W + 80;
+            if (t.x > W + 120) t.x = -80;
+
+            const col = isLight()
+              ? `rgba(0,40,140,${t.alpha})`
+              : `rgba(0,212,255,${t.alpha})`;
+            ctx.save();
+            ctx.translate(t.x, t.y);
+            ctx.rotate(t.rot);
+            ctx.globalAlpha = t.alpha;
+            ctx.font = `900 ${t.size}px 'Bahnschrift','Century Gothic','Arial Narrow',Arial,sans-serif`;
+            ctx.letterSpacing = "0.15em";
+            ctx.fillStyle = "transparent";
+            ctx.strokeStyle = isLight()
+              ? "rgba(0,40,140,1)"
+              : "rgba(0,212,255,1)";
+            ctx.lineWidth = 0.8;
+            ctx.strokeText(t.word, -ctx.measureText(t.word).width / 2, 0);
+            ctx.globalAlpha = 1;
+            ctx.restore();
           });
 
           // Faint connections between nearby parts
