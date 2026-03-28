@@ -429,64 +429,6 @@
       }
 
       /* Canvas background */
-      #bg-canvas {
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        opacity: 1;
-      }
-
-      /* Bikey dark road background */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        background:
-          radial-gradient(
-            ellipse 100% 40% at 50% 100%,
-            rgba(0, 180, 255, 0.06) 0%,
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 60% 30% at 50% 85%,
-            rgba(0, 100, 255, 0.05) 0%,
-            transparent 60%
-          ),
-          radial-gradient(
-            ellipse 40% 20% at 50% 100%,
-            rgba(0, 212, 255, 0.04) 0%,
-            transparent 50%
-          ),
-          #080a0f;
-        pointer-events: none;
-        transition: opacity 0.35s ease;
-      }
-
-      html.light body::before {
-        background:
-          radial-gradient(
-            ellipse 100% 50% at 50% 100%,
-            rgba(0, 80, 200, 0.12) 0%,
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 70% 40% at 20% 0%,
-            rgba(0, 60, 160, 0.1) 0%,
-            transparent 60%
-          ),
-          radial-gradient(
-            ellipse 50% 30% at 80% 10%,
-            rgba(40, 0, 160, 0.07) 0%,
-            transparent 55%
-          ),
-          radial-gradient(
-            ellipse 60% 35% at 50% 50%,
-            rgba(0, 40, 120, 0.05) 0%,
-            transparent 60%
-          ),
-          #c8d4e8;
-      }
 
       /* NAV */
       nav {
@@ -539,7 +481,7 @@
       }
 
       .nav-cta {
-        background: transparent;
+        background: var(--bg);
         border: 1px solid var(--accent);
         color: var(--accent);
         font-family:
@@ -691,7 +633,7 @@
       }
 
       .btn-ghost {
-        background: transparent;
+        background: var(--bg);
         color: var(--text);
         border: 1px solid var(--border);
         padding: 14px 36px;
@@ -1022,7 +964,7 @@
         transition: transform 0.3s;
       }
       .product-card:hover {
-        background: var(--card);
+        background: rgba(17, 22, 32, 0.75);
       }
       .product-card:hover::before {
         transform: scaleX(1);
@@ -1225,7 +1167,7 @@
         transition: all 0.2s;
       }
       .plan-btn.outline {
-        background: transparent;
+        background: var(--bg);
         border: 1px solid var(--border);
         color: var(--text);
       }
@@ -1459,6 +1401,7 @@
         justify-content: space-between;
         position: relative;
         z-index: 1;
+        background: transparent;
       }
 
       .footer-logo {
@@ -1533,16 +1476,48 @@
         background: rgba(0, 212, 255, 0.3);
       }
 
+      /* ═══════════════════════════════════
+     RESPONSIVE — TABLET (max 900px)
+  ═══════════════════════════════════ */
       @media (max-width: 900px) {
         nav {
-          padding: 16px 24px;
+          padding: 14px 20px;
+          gap: 12px;
         }
         .nav-links {
           display: none;
         }
+        .nav-cta {
+          padding: 8px 16px;
+          font-size: 0.7rem;
+        }
+
+        #hero {
+          padding: 100px 24px 60px;
+        }
+
+        .hero-dash {
+          margin-top: 48px;
+        }
+        .dash-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .stats-strip {
+          grid-template-columns: repeat(2, 1fr);
+          padding: 0;
+          gap: 1px;
+        }
+        .stat-item {
+          padding: 28px 20px;
+        }
+        .stat-num {
+          font-size: 2rem;
+        }
+
         #about {
           grid-template-columns: 1fr;
-          gap: 48px;
+          gap: 40px;
           padding: 80px 24px;
         }
         #products {
@@ -1551,31 +1526,237 @@
         .products-grid {
           grid-template-columns: 1fr;
         }
-        .stats-strip {
-          grid-template-columns: repeat(2, 1fr);
-          padding: 20px;
+
+        #pricing {
+          padding: 80px 24px;
+          max-width: 100%;
         }
         .pricing-grid {
           grid-template-columns: 1fr;
+          gap: 16px;
         }
-        #pricing,
-        #testimonials,
+
+        #testimonials {
+          padding: 80px 24px;
+        }
         #contact {
           padding: 80px 24px;
         }
-        .dash-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
         .contact-box {
-          padding: 32px 24px;
+          padding: 32px 20px;
         }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+
         footer {
           flex-direction: column;
           gap: 20px;
           text-align: center;
+          padding: 32px 24px;
         }
-        .form-row {
-          grid-template-columns: 1fr;
+        .footer-links {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 20px;
+        }
+      }
+
+      /* ═══════════════════════════════════
+     RESPONSIVE — MOBILE (max 480px)
+  ═══════════════════════════════════ */
+      @media (max-width: 480px) {
+        /* Hide cursor on touch */
+        #cursor,
+        #cursor-ring {
+          display: none;
+        }
+        body {
+          cursor: auto;
+        }
+
+        /* Nav */
+        nav {
+          padding: 12px 16px;
+          gap: 8px;
+        }
+        .logo {
+          font-size: 1rem;
+          letter-spacing: 0.15em;
+        }
+        .nav-cta {
+          display: none;
+        }
+
+        /* Hero */
+        #hero {
+          padding: 90px 16px 48px;
+          min-height: auto;
+        }
+        .hero-tag {
+          font-size: 0.6rem;
+          padding: 5px 12px;
+          margin-bottom: 24px;
+        }
+        h1 {
+          font-size: clamp(2rem, 10vw, 3.2rem);
+          line-height: 1.1;
+        }
+        .hero-sub {
+          font-size: 0.88rem;
+          margin-top: 16px;
+        }
+        .hero-buttons {
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+          margin-top: 28px;
+        }
+        .btn-primary,
+        .btn-ghost {
+          width: 100%;
+          max-width: 280px;
+          text-align: center;
+          padding: 14px 24px;
+        }
+
+        /* Dashboard */
+        .hero-dash {
+          margin-top: 36px;
+        }
+        .dash-frame {
+          padding: 16px;
+        }
+        .dash-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+        .dash-card {
+          padding: 12px;
+        }
+        .dash-card-value {
+          font-size: 1.4rem;
+        }
+        .dash-card:last-child {
+          grid-column: 1 / -1;
+        }
+
+        /* Stats */
+        .stats-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .stat-item {
+          padding: 20px 12px;
+        }
+        .stat-num {
+          font-size: 1.8rem;
+        }
+        .stat-label {
+          font-size: 0.62rem;
+        }
+
+        /* About */
+        #about {
+          padding: 60px 16px;
+          gap: 32px;
+        }
+        h2 {
+          font-size: 1.6rem;
+        }
+        .about-card {
+          padding: 20px 16px;
+        }
+
+        /* Products */
+        #products {
+          padding: 60px 16px;
+        }
+        .products-grid {
+          gap: 1px;
+        }
+        .product-card {
+          padding: 28px 20px;
+        }
+        .product-name {
+          font-size: 0.85rem;
+        }
+        .product-desc {
+          font-size: 0.8rem;
+        }
+        .products-header {
+          margin-bottom: 40px;
+        }
+
+        /* Pricing */
+        #pricing {
+          padding: 60px 16px;
+        }
+        .pricing-card {
+          padding: 28px 20px;
+        }
+        .plan-price {
+          font-size: 2.4rem;
+        }
+        .pricing-header {
+          margin-bottom: 40px;
+        }
+
+        /* Testimonials */
+        #testimonials {
+          padding: 60px 16px;
+        }
+        .test-card {
+          width: 280px;
+          padding: 24px;
+        }
+        .test-header {
+          margin-bottom: 40px;
+        }
+
+        /* Contact */
+        #contact {
+          padding: 60px 16px;
+          max-width: 100%;
+        }
+        .contact-box {
+          padding: 24px 16px;
+          margin-top: 32px;
+        }
+        .submit-btn {
+          padding: 14px;
+        }
+
+        /* Section tags + headings */
+        .section-tag {
+          font-size: 0.6rem;
+        }
+
+        /* Footer */
+        footer {
+          padding: 24px 16px;
+          gap: 16px;
+        }
+        .footer-logo {
+          font-size: 0.9rem;
+        }
+        .footer-links {
+          gap: 16px;
+        }
+        .footer-links a {
+          font-size: 0.7rem;
+        }
+        .footer-copy {
+          font-size: 0.65rem;
+        }
+
+        /* Toggle */
+        #theme-toggle {
+          margin-left: 6px;
+        }
+
+        /* Scroll bar */
+        #scroll-bar {
+          height: 2px;
         }
       }
       /* Theme Toggle */
@@ -1920,13 +2101,148 @@
         z-index: 9999;
         transition: width 0.05s linear;
       }
+
+      /* ── Background canvas ── */
+      #bg-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 1;
+      }
+
+      /* ── Hamburger ── */
+      #hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        z-index: 101;
+      }
+      #hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--white);
+        border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+      #hamburger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      #hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      #hamburger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      /* ── Mobile drawer ── */
+      #mobile-menu {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        z-index: 200;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        opacity: 0;
+        transform: translateX(100%);
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
+      }
+      #mobile-menu.open {
+        display: flex;
+        opacity: 1;
+        transform: translateX(0);
+      }
+      #mobile-menu ul {
+        list-style: none;
+        text-align: center;
+      }
+      #mobile-menu ul li {
+        margin: 18px 0;
+      }
+      #mobile-menu ul li a {
+        font-family: "Bahnschrift", "Century Gothic", Arial, sans-serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--white);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      #mobile-menu ul li a:hover {
+        color: var(--accent);
+      }
+      .mobile-cta {
+        margin-top: 32px;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        color: var(--bg);
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 14px 36px;
+      }
+      #mobile-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: var(--white);
+        font-size: 1.4rem;
+        cursor: pointer;
+      }
+
+      @media (max-width: 900px) {
+        #hamburger {
+          display: flex;
+        }
+        .nav-cta {
+          display: none;
+        }
+        #theme-toggle {
+          display: none;
+        }
+      }
+
+      .mobile-theme-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 8px;
+      }
+      .mobile-theme-label {
+        font-size: 0.8rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      #mobile-theme-toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+      }
     </style>
   </head>
   <body>
+    <canvas id="bg-canvas"></canvas>
     <div id="scroll-bar"></div>
     <div id="cursor"></div>
     <div id="cursor-ring"></div>
-    <canvas id="bg-canvas"></canvas>
 
     <!-- NAV -->
     <nav>
@@ -2037,7 +2353,127 @@
           </span>
         </span>
       </button>
+
+      <!-- Hamburger -->
+      <button id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobile-menu">
+      <button id="mobile-close">✕</button>
+      <ul>
+        <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
+        <li><a href="#products" onclick="closeMobileMenu()">Features</a></li>
+        <li><a href="#pricing" onclick="closeMobileMenu()">Pricing</a></li>
+        <li><a href="#testimonials" onclick="closeMobileMenu()">Riders</a></li>
+        <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+      </ul>
+      <!-- Theme toggle inside mobile menu -->
+      <div class="mobile-theme-row">
+        <span class="mobile-theme-label" id="mobile-theme-label"
+          >Dark Mode</span
+        >
+        <button id="mobile-theme-toggle" aria-label="Toggle theme">
+          <span class="toggle-track">
+            <span class="toggle-thumb">
+              <svg
+                class="icon-moon"
+                width="10"
+                height="10"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+              <svg
+                class="icon-sun"
+                width="11"
+                height="11"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <circle cx="12" cy="12" r="5" />
+                <line
+                  x1="12"
+                  y1="1"
+                  x2="12"
+                  y2="3"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="12"
+                  y1="21"
+                  x2="12"
+                  y2="23"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="4.22"
+                  y1="4.22"
+                  x2="5.64"
+                  y2="5.64"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="18.36"
+                  y1="18.36"
+                  x2="19.78"
+                  y2="19.78"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="1"
+                  y1="12"
+                  x2="3"
+                  y2="12"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="21"
+                  y1="12"
+                  x2="23"
+                  y2="12"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="4.22"
+                  y1="19.78"
+                  x2="5.64"
+                  y2="18.36"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="18.36"
+                  y1="5.64"
+                  x2="19.78"
+                  y2="4.22"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+      </div>
+      <a href="#" class="mobile-cta">Get Early Access</a>
+    </div>
 
     <!-- HERO -->
     <section id="hero">
@@ -2706,336 +3142,6 @@
         scrollBar.style.width = pct + "%";
       });
 
-      // ── RACEOS ZERO-G CANVAS ──
-      // Bike parts floating upward slowly like zero gravity — calm, ambient, not physics-heavy
-      const canvas = document.getElementById("bg-canvas");
-      const ctx = canvas.getContext("2d");
-      let W = window.innerWidth,
-        H = window.innerHeight;
-
-      function resize() {
-        W = canvas.width = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-      }
-      resize();
-      window.addEventListener("resize", resize);
-
-      const isLight = () =>
-        document.documentElement.classList.contains("light");
-      const rand = (a, b) => Math.random() * (b - a) + a;
-
-      // ── Spawn a floating part ──
-      function makePart() {
-        const types = [
-          "gear",
-          "bolt",
-          "piston",
-          "spark",
-          "chain",
-          "tyre",
-          "ring",
-        ];
-        const type = types[Math.floor(Math.random() * types.length)];
-        const size = rand(10, 36);
-        return {
-          type,
-          x: rand(0, W),
-          y: rand(H + 20, H + 300), // start below screen
-          vx: rand(-0.18, 0.18), // gentle side drift
-          vy: rand(-0.25, -0.65), // float upward slowly
-          rot: rand(0, Math.PI * 2),
-          vrot: rand(-0.004, 0.004), // slow spin
-          size,
-          alpha: rand(0.06, 0.18),
-          teeth: Math.floor(rand(6, 14)),
-        };
-      }
-
-      const PARTS = Array.from({ length: 48 }, () => {
-        const p = makePart();
-        p.y = rand(-H, H); // scatter initially so screen fills immediately
-        return p;
-      });
-
-      // ── Shape renderers ──
-      function gear(x, y, r, teeth, rot, col, alpha) {
-        const ir = r * 0.55,
-          th = r * 0.28,
-          tw = ((Math.PI * 2) / teeth) * 0.4;
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(rot);
-        ctx.globalAlpha = alpha;
-        ctx.strokeStyle = col;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        for (let i = 0; i < teeth; i++) {
-          const a0 = (i / teeth) * Math.PI * 2,
-            a1 = a0 + tw,
-            a2 = a0 + tw * 1.9,
-            a3 = a0 + (1 / teeth) * Math.PI * 2;
-          ctx.lineTo(Math.cos(a0) * r, Math.sin(a0) * r);
-          ctx.lineTo(Math.cos(a0) * (r + th), Math.sin(a0) * (r + th));
-          ctx.lineTo(Math.cos(a2) * (r + th), Math.sin(a2) * (r + th));
-          ctx.lineTo(Math.cos(a3) * r, Math.sin(a3) * r);
-        }
-        ctx.closePath();
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(0, 0, ir, 0, Math.PI * 2);
-        ctx.stroke();
-        for (let i = 0; i < 5; i++) {
-          const a = (i / 5) * Math.PI * 2;
-          ctx.beginPath();
-          ctx.moveTo(Math.cos(a) * ir * 0.28, Math.sin(a) * ir * 0.28);
-          ctx.lineTo(Math.cos(a) * ir, Math.sin(a) * ir);
-          ctx.stroke();
-        }
-        ctx.globalAlpha = 1;
-        ctx.restore();
-      }
-
-      function bolt(x, y, r, rot, col, alpha) {
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(rot);
-        ctx.globalAlpha = alpha;
-        ctx.strokeStyle = col;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        for (let i = 0; i < 6; i++) {
-          const a = (i / 6) * Math.PI * 2;
-          i === 0
-            ? ctx.moveTo(Math.cos(a) * r, Math.sin(a) * r)
-            : ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r);
-        }
-        ctx.closePath();
-        ctx.stroke();
-        ctx.beginPath();
-        for (let i = 0; i < 6; i++) {
-          const a = (i / 6) * Math.PI * 2;
-          i === 0
-            ? ctx.moveTo(Math.cos(a) * r * 0.45, Math.sin(a) * r * 0.45)
-            : ctx.lineTo(Math.cos(a) * r * 0.45, Math.sin(a) * r * 0.45);
-        }
-        ctx.closePath();
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(0, r);
-        ctx.lineTo(0, r * 2.4);
-        ctx.moveTo(-r * 0.28, r * 1.5);
-        ctx.lineTo(r * 0.28, r * 1.5);
-        ctx.moveTo(-r * 0.28, r * 1.95);
-        ctx.lineTo(r * 0.28, r * 1.95);
-        ctx.stroke();
-        ctx.globalAlpha = 1;
-        ctx.restore();
-      }
-
-      function piston(x, y, r, rot, col, alpha) {
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(rot);
-        ctx.globalAlpha = alpha;
-        ctx.strokeStyle = col;
-        ctx.lineWidth = 1;
-        ctx.strokeRect(-r / 2, -r * 0.9, r, r * 1.8);
-        ctx.beginPath();
-        ctx.moveTo(-r / 2, -r * 0.3);
-        ctx.lineTo(r / 2, -r * 0.3);
-        ctx.moveTo(-r / 2, r * 0.1);
-        ctx.lineTo(r / 2, r * 0.1);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(0, r * 0.9);
-        ctx.lineTo(0, r * 1.5);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(0, r * 1.4, r * 0.18, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.globalAlpha = 1;
-        ctx.restore();
-      }
-
-      function spark(x, y, r, rot, col, alpha) {
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(rot);
-        ctx.globalAlpha = alpha;
-        ctx.strokeStyle = col;
-        ctx.lineWidth = 1;
-        ctx.strokeRect(-r * 0.28, -r, r * 0.56, r * 0.9);
-        for (let i = 0; i < 3; i++) {
-          ctx.beginPath();
-          ctx.moveTo(-r * 0.28, -r * 0.7 + i * r * 0.27);
-          ctx.lineTo(r * 0.28, -r * 0.7 + i * r * 0.27);
-          ctx.stroke();
-        }
-        ctx.beginPath();
-        for (let i = 0; i < 6; i++) {
-          const a = (i / 6) * Math.PI * 2;
-          i === 0
-            ? ctx.moveTo(Math.cos(a) * r * 0.36, Math.sin(a) * r * 0.36)
-            : ctx.lineTo(Math.cos(a) * r * 0.36, Math.sin(a) * r * 0.36);
-        }
-        ctx.closePath();
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(0, r * 0.18);
-        ctx.lineTo(0, r * 0.7);
-        ctx.moveTo(-r * 0.22, r * 0.7);
-        ctx.lineTo(r * 0.22, r * 0.7);
-        ctx.stroke();
-        ctx.globalAlpha = 1;
-        ctx.restore();
-      }
-
-      function chain(x, y, r, rot, col, alpha) {
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(rot);
-        ctx.globalAlpha = alpha;
-        ctx.strokeStyle = col;
-        ctx.lineWidth = 1;
-        const lw = r * 0.48,
-          lh = r * 0.26,
-          links = 5;
-        for (let i = 0; i < links; i++) {
-          const ox = (i - links / 2) * lw * 1.08;
-          ctx.strokeRect(ox - lw / 2, -lh / 2, lw, lh);
-          ctx.beginPath();
-          ctx.arc(ox, 0, lh * 0.28, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-        ctx.globalAlpha = 1;
-        ctx.restore();
-      }
-
-      function tyre(x, y, r, rot, col, alpha) {
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(rot);
-        ctx.globalAlpha = alpha;
-        ctx.strokeStyle = col;
-        ctx.lineWidth = 1.2;
-        ctx.beginPath();
-        ctx.arc(0, 0, r, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(0, 0, r * 0.6, 0, Math.PI * 2);
-        ctx.stroke();
-        for (let i = 0; i < 6; i++) {
-          const a = (i / 6) * Math.PI * 2;
-          ctx.beginPath();
-          ctx.moveTo(Math.cos(a) * r * 0.6, Math.sin(a) * r * 0.6);
-          ctx.lineTo(Math.cos(a) * r * 0.14, Math.sin(a) * r * 0.14);
-          ctx.stroke();
-        }
-        const tr = 16;
-        for (let i = 0; i < tr; i++) {
-          const a = (i / tr) * Math.PI * 2;
-          ctx.beginPath();
-          ctx.moveTo(Math.cos(a) * r * 0.87, Math.sin(a) * r * 0.87);
-          ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r);
-          ctx.stroke();
-        }
-        ctx.globalAlpha = 1;
-        ctx.restore();
-      }
-
-      function drawRingShape(x, y, r, rot, col, alpha) {
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(rot);
-        ctx.globalAlpha = alpha;
-        ctx.strokeStyle = col;
-        ctx.lineWidth = 1.2;
-        ctx.beginPath();
-        ctx.arc(0, 0, r, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.globalAlpha = alpha * 0.15;
-        ctx.lineWidth = 4;
-        ctx.beginPath();
-        ctx.arc(0, 0, r, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.globalAlpha = 1;
-        ctx.restore();
-      }
-
-      function drawPart(p) {
-        const col = isLight() ? "rgba(0,40,140,1)" : "rgba(0,212,255,1)";
-        switch (p.type) {
-          case "gear":
-            gear(p.x, p.y, p.size, p.teeth, p.rot, col, p.alpha);
-            break;
-          case "bolt":
-            bolt(p.x, p.y, p.size * 0.55, p.rot, col, p.alpha);
-            break;
-          case "piston":
-            piston(p.x, p.y, p.size, p.rot, col, p.alpha);
-            break;
-          case "spark":
-            spark(p.x, p.y, p.size, p.rot, col, p.alpha);
-            break;
-          case "chain":
-            chain(p.x, p.y, p.size, p.rot, col, p.alpha);
-            break;
-          case "tyre":
-            tyre(p.x, p.y, p.size, p.rot, col, p.alpha);
-            break;
-          case "ring":
-            drawRingShape(p.x, p.y, p.size * 0.65, p.rot, col, p.alpha);
-            break;
-        }
-      }
-
-      function drawFrame() {
-        ctx.clearRect(0, 0, W, H);
-
-        PARTS.forEach((p) => {
-          // Float upward with gentle drift
-          p.x += p.vx;
-          p.y += p.vy;
-          p.rot += p.vrot;
-
-          // Slight horizontal sway using sine
-          p.x += Math.sin(p.y * 0.008 + p.rot) * 0.12;
-
-          // Wrap: when floated off top, respawn at bottom
-          if (p.y < -p.size * 3) {
-            const fresh = makePart();
-            Object.assign(p, fresh);
-          }
-          // Wrap sides gently
-          if (p.x < -p.size * 2) p.x = W + p.size;
-          if (p.x > W + p.size * 2) p.x = -p.size;
-
-          drawPart(p);
-        });
-
-        // Faint connection lines between nearby parts
-        for (let i = 0; i < PARTS.length; i++) {
-          for (let j = i + 1; j < PARTS.length; j++) {
-            const dx = PARTS[i].x - PARTS[j].x,
-              dy = PARTS[i].y - PARTS[j].y;
-            const d = Math.sqrt(dx * dx + dy * dy);
-            if (d < 120) {
-              ctx.beginPath();
-              ctx.moveTo(PARTS[i].x, PARTS[i].y);
-              ctx.lineTo(PARTS[j].x, PARTS[j].y);
-              ctx.strokeStyle = isLight()
-                ? `rgba(0,40,160,${0.04 * (1 - d / 120)})`
-                : `rgba(0,212,255,${0.05 * (1 - d / 120)})`;
-              ctx.lineWidth = 0.5;
-              ctx.stroke();
-            }
-          }
-        }
-
-        requestAnimationFrame(drawFrame);
-      }
-      drawFrame();
-
       // ── Ripple on buttons ──
       document
         .querySelectorAll(
@@ -3248,14 +3354,367 @@
         });
       });
 
+      // ── FLOATING BIKE PARTS BACKGROUND ──
+      (function () {
+        const canvas = document.getElementById("bg-canvas");
+        const ctx = canvas.getContext("2d");
+        let W, H;
+        const isLight = () =>
+          document.documentElement.classList.contains("light");
+        const rand = (a, b) => Math.random() * (b - a) + a;
+
+        function resize() {
+          W = canvas.width = innerWidth;
+          H = canvas.height = innerHeight;
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        const TYPES = [
+          "gear",
+          "bolt",
+          "piston",
+          "spark",
+          "chain",
+          "tyre",
+          "ring",
+        ];
+
+        function makePart() {
+          return {
+            type: TYPES[Math.floor(Math.random() * TYPES.length)],
+            x: rand(0, W),
+            y: rand(H + 20, H + 300),
+            vx: rand(-0.15, 0.15),
+            vy: rand(-0.3, -0.7),
+            rot: rand(0, Math.PI * 2),
+            vrot: rand(-0.003, 0.003),
+            size: rand(12, 38),
+            alpha: rand(0.07, 0.18),
+            teeth: Math.floor(rand(6, 14)),
+          };
+        }
+
+        const PARTS = Array.from({ length: 45 }, () => {
+          const p = makePart();
+          p.y = rand(-H, H);
+          return p;
+        });
+
+        // ── Renderers ──
+        function gear(x, y, r, teeth, rot, col, a) {
+          const ir = r * 0.55,
+            th = r * 0.28,
+            tw = ((Math.PI * 2) / teeth) * 0.4;
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(rot);
+          ctx.globalAlpha = a;
+          ctx.strokeStyle = col;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          for (let i = 0; i < teeth; i++) {
+            const a0 = (i / teeth) * Math.PI * 2,
+              a2 = a0 + tw * 1.9,
+              a3 = a0 + (1 / teeth) * Math.PI * 2;
+            ctx.lineTo(Math.cos(a0) * r, Math.sin(a0) * r);
+            ctx.lineTo(Math.cos(a0) * (r + th), Math.sin(a0) * (r + th));
+            ctx.lineTo(Math.cos(a2) * (r + th), Math.sin(a2) * (r + th));
+            ctx.lineTo(Math.cos(a3) * r, Math.sin(a3) * r);
+          }
+          ctx.closePath();
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(0, 0, ir, 0, Math.PI * 2);
+          ctx.stroke();
+          for (let i = 0; i < 5; i++) {
+            const a = (i / 5) * Math.PI * 2;
+            ctx.beginPath();
+            ctx.moveTo(Math.cos(a) * ir * 0.28, Math.sin(a) * ir * 0.28);
+            ctx.lineTo(Math.cos(a) * ir, Math.sin(a) * ir);
+            ctx.stroke();
+          }
+          ctx.globalAlpha = 1;
+          ctx.restore();
+        }
+
+        function bolt(x, y, r, rot, col, a) {
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(rot);
+          ctx.globalAlpha = a;
+          ctx.strokeStyle = col;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          for (let i = 0; i < 6; i++) {
+            const ang = (i / 6) * Math.PI * 2;
+            i === 0
+              ? ctx.moveTo(Math.cos(ang) * r, Math.sin(ang) * r)
+              : ctx.lineTo(Math.cos(ang) * r, Math.sin(ang) * r);
+          }
+          ctx.closePath();
+          ctx.stroke();
+          ctx.beginPath();
+          for (let i = 0; i < 6; i++) {
+            const ang = (i / 6) * Math.PI * 2;
+            i === 0
+              ? ctx.moveTo(Math.cos(ang) * r * 0.45, Math.sin(ang) * r * 0.45)
+              : ctx.lineTo(Math.cos(ang) * r * 0.45, Math.sin(ang) * r * 0.45);
+          }
+          ctx.closePath();
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(0, r);
+          ctx.lineTo(0, r * 2.4);
+          ctx.moveTo(-r * 0.28, r * 1.5);
+          ctx.lineTo(r * 0.28, r * 1.5);
+          ctx.moveTo(-r * 0.28, r * 1.95);
+          ctx.lineTo(r * 0.28, r * 1.95);
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+          ctx.restore();
+        }
+
+        function piston(x, y, r, rot, col, a) {
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(rot);
+          ctx.globalAlpha = a;
+          ctx.strokeStyle = col;
+          ctx.lineWidth = 1;
+          ctx.strokeRect(-r / 2, -r * 0.9, r, r * 1.8);
+          ctx.beginPath();
+          ctx.moveTo(-r / 2, -r * 0.3);
+          ctx.lineTo(r / 2, -r * 0.3);
+          ctx.moveTo(-r / 2, r * 0.1);
+          ctx.lineTo(r / 2, r * 0.1);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(0, r * 0.9);
+          ctx.lineTo(0, r * 1.5);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(0, r * 1.4, r * 0.18, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+          ctx.restore();
+        }
+
+        function spark(x, y, r, rot, col, a) {
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(rot);
+          ctx.globalAlpha = a;
+          ctx.strokeStyle = col;
+          ctx.lineWidth = 1;
+          ctx.strokeRect(-r * 0.28, -r, r * 0.56, r * 0.9);
+          for (let i = 0; i < 3; i++) {
+            ctx.beginPath();
+            ctx.moveTo(-r * 0.28, -r * 0.7 + i * r * 0.27);
+            ctx.lineTo(r * 0.28, -r * 0.7 + i * r * 0.27);
+            ctx.stroke();
+          }
+          ctx.beginPath();
+          for (let i = 0; i < 6; i++) {
+            const ang = (i / 6) * Math.PI * 2;
+            i === 0
+              ? ctx.moveTo(Math.cos(ang) * r * 0.36, Math.sin(ang) * r * 0.36)
+              : ctx.lineTo(Math.cos(ang) * r * 0.36, Math.sin(ang) * r * 0.36);
+          }
+          ctx.closePath();
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(0, r * 0.18);
+          ctx.lineTo(0, r * 0.7);
+          ctx.moveTo(-r * 0.22, r * 0.7);
+          ctx.lineTo(r * 0.22, r * 0.7);
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+          ctx.restore();
+        }
+
+        function chain(x, y, r, rot, col, a) {
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(rot);
+          ctx.globalAlpha = a;
+          ctx.strokeStyle = col;
+          ctx.lineWidth = 1;
+          const lw = r * 0.48,
+            lh = r * 0.26,
+            links = 5;
+          for (let i = 0; i < links; i++) {
+            const ox = (i - links / 2) * lw * 1.08;
+            ctx.strokeRect(ox - lw / 2, -lh / 2, lw, lh);
+            ctx.beginPath();
+            ctx.arc(ox, 0, lh * 0.28, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+          ctx.globalAlpha = 1;
+          ctx.restore();
+        }
+
+        function tyre(x, y, r, rot, col, a) {
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(rot);
+          ctx.globalAlpha = a;
+          ctx.strokeStyle = col;
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.arc(0, 0, r, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(0, 0, r * 0.6, 0, Math.PI * 2);
+          ctx.stroke();
+          for (let i = 0; i < 6; i++) {
+            const ang = (i / 6) * Math.PI * 2;
+            ctx.beginPath();
+            ctx.moveTo(Math.cos(ang) * r * 0.6, Math.sin(ang) * r * 0.6);
+            ctx.lineTo(Math.cos(ang) * r * 0.14, Math.sin(ang) * r * 0.14);
+            ctx.stroke();
+          }
+          const tr = 16;
+          for (let i = 0; i < tr; i++) {
+            const ang = (i / tr) * Math.PI * 2;
+            ctx.beginPath();
+            ctx.moveTo(Math.cos(ang) * r * 0.87, Math.sin(ang) * r * 0.87);
+            ctx.lineTo(Math.cos(ang) * r, Math.sin(ang) * r);
+            ctx.stroke();
+          }
+          ctx.globalAlpha = 1;
+          ctx.restore();
+        }
+
+        function exhaustRing(x, y, r, rot, col, a) {
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(rot);
+          ctx.globalAlpha = a;
+          ctx.strokeStyle = col;
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.arc(0, 0, r, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.globalAlpha = a * 0.18;
+          ctx.lineWidth = 4;
+          ctx.beginPath();
+          ctx.arc(0, 0, r, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+          ctx.restore();
+        }
+
+        function drawPart(p) {
+          const col = isLight() ? "rgba(0,40,140,1)" : "rgba(0,200,255,1)";
+          switch (p.type) {
+            case "gear":
+              gear(p.x, p.y, p.size, p.teeth, p.rot, col, p.alpha);
+              break;
+            case "bolt":
+              bolt(p.x, p.y, p.size * 0.55, p.rot, col, p.alpha);
+              break;
+            case "piston":
+              piston(p.x, p.y, p.size, p.rot, col, p.alpha);
+              break;
+            case "spark":
+              spark(p.x, p.y, p.size, p.rot, col, p.alpha);
+              break;
+            case "chain":
+              chain(p.x, p.y, p.size, p.rot, col, p.alpha);
+              break;
+            case "tyre":
+              tyre(p.x, p.y, p.size, p.rot, col, p.alpha);
+              break;
+            case "ring":
+              exhaustRing(p.x, p.y, p.size * 0.65, p.rot, col, p.alpha);
+              break;
+          }
+        }
+
+        function loop() {
+          ctx.clearRect(0, 0, W, H);
+
+          PARTS.forEach((p) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rot += p.vrot;
+            p.x += Math.sin(p.y * 0.007 + p.rot) * 0.1;
+            if (p.y < -p.size * 4) {
+              Object.assign(p, makePart());
+            }
+            if (p.x < -p.size * 2) p.x = W + p.size;
+            if (p.x > W + p.size * 2) p.x = -p.size;
+            drawPart(p);
+          });
+
+          // Faint connections between nearby parts
+          for (let i = 0; i < PARTS.length; i++) {
+            for (let j = i + 1; j < PARTS.length; j++) {
+              const dx = PARTS[i].x - PARTS[j].x,
+                dy = PARTS[i].y - PARTS[j].y;
+              const d = Math.sqrt(dx * dx + dy * dy);
+              if (d < 100) {
+                ctx.beginPath();
+                ctx.moveTo(PARTS[i].x, PARTS[i].y);
+                ctx.lineTo(PARTS[j].x, PARTS[j].y);
+                ctx.strokeStyle = isLight()
+                  ? `rgba(0,40,160,${0.05 * (1 - d / 100)})`
+                  : `rgba(0,200,255,${0.06 * (1 - d / 100)})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+              }
+            }
+          }
+
+          requestAnimationFrame(loop);
+        }
+        loop();
+      })();
+
+      // ── Hamburger menu ──
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const mobileClose = document.getElementById("mobile-close");
+
+      function openMobileMenu() {
+        mobileMenu.classList.add("open");
+        hamburger.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeMobileMenu() {
+        mobileMenu.classList.remove("open");
+        hamburger.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      hamburger.addEventListener("click", () =>
+        mobileMenu.classList.contains("open")
+          ? closeMobileMenu()
+          : openMobileMenu(),
+      );
+      mobileClose.addEventListener("click", closeMobileMenu);
+
       // ── Theme toggle ──
       const themeToggle = document.getElementById("theme-toggle");
-      if (localStorage.getItem("raceos-theme") === "light")
-        document.documentElement.classList.add("light");
-      themeToggle.addEventListener("click", () => {
-        const isLight = document.documentElement.classList.toggle("light");
+      const mobileThemeToggle = document.getElementById("mobile-theme-toggle");
+      const mobileThemeLabel = document.getElementById("mobile-theme-label");
+
+      function applyTheme(isLight) {
+        document.documentElement.classList.toggle("light", isLight);
         localStorage.setItem("raceos-theme", isLight ? "light" : "dark");
-      });
+        if (mobileThemeLabel)
+          mobileThemeLabel.textContent = isLight ? "Light Mode" : "Dark Mode";
+      }
+
+      if (localStorage.getItem("raceos-theme") === "light") applyTheme(true);
+
+      themeToggle.addEventListener("click", () =>
+        applyTheme(!document.documentElement.classList.contains("light")),
+      );
+      mobileThemeToggle.addEventListener("click", () =>
+        applyTheme(!document.documentElement.classList.contains("light")),
+      );
     </script>
   </body>
 </html>
